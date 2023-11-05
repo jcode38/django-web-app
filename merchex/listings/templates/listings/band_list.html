@@ -1,0 +1,30 @@
+{% extends 'listings/base.html' %}
+
+{% block content %}
+
+    <h1>Hello Django !</h1>
+    <p>J'ai..
+        {% if band|length < 5 %}
+            peu de
+        {% elif band|length < 10 %}
+            quelques
+        {% else %}
+            beaucoup de
+        {% endif %}
+            groupes préférés.
+        C'est à dire {{ bands|length }} groupes
+
+        (it is {% now "jS F Y H:i" %})
+    </p>
+
+        <ul>
+            {% for band in bands %}
+                <li>
+                    <a href="{% url 'band-detail' band.id %}">{{ band.name }}</a>
+                    <a href="{% url 'band-update' band.id %}">[modifier]</a>
+                    <a href="{% url 'band-delete' band.id %}">[supprimer]</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+{% endblock %}
